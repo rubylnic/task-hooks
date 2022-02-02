@@ -1,7 +1,7 @@
 import List from "./List";
 import { useState, useEffect } from 'react';
 import Details from "./Details";
-export default function UseEffectList() {
+export default function useEffectList() {
   const [users, setUsers] = useState([]);
   const [chosenUser, setChosenUser] = useState();
   const [userInfo, setUserInfo] = useState();
