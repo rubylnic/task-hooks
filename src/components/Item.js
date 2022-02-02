@@ -6,10 +6,6 @@ export default function Item({ id, name, getDetails }) {
     name: name
   }
 
-  const handleClick = () => {
-
-  }
-
   return (
     <div className="item" id={id} onClick={() => { getDetails(info) }}>
       {name}

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Details from "./Details";
 export default function UseEffectList() {
   const [users, setUsers] = useState([]);
-  const [chosenUser, setChosenUser] = useState({});
+  const [chosenUser, setChosenUser] = useState();
   const [userInfo, setUserInfo] = useState();
 
   const fetchApi = (url, setter) => {
@@ -20,14 +20,18 @@ export default function UseEffectList() {
   }
 
   const getDetails = (props) => {
-    fetchApi(process.env.REACT_APP_USER_URL + props.id + '.json', setUserInfo);
+    setChosenUser(props);
   }
 
   useEffect(() => {
     fetchApi(process.env.REACT_APP_USERS_URL, setUsers)
   }, [])
 
-  console.log(users, userInfo)
+  useEffect(() => {
+    chosenUser ? fetchApi(process.env.REACT_APP_USER_URL + chosenUser.id + '.json', setUserInfo) : console.log('first load');
+    console.log('fetched')
+  }, [chosenUser?.id])
+
   return (
     <div>
       <List items={users} getDetails={getDetails} />
